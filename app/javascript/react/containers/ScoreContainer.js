@@ -4,7 +4,7 @@ class ScoreContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      board: [],
+      score: '',
     };
   }
 
