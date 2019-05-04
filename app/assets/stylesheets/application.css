@@ -27,3 +27,14 @@
   justify-content: center;
   text-align: center;
 }
+.screen-container {
+  height: 700px;
+  margin: 10px 10%;
+}
+.input-container {
+  margin: 10px 30%;
+}
+.score-container {
+  margin: 10px 20%;
+  height: 200px;
+}

@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 class ScreenContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      board: this.props.board,
+    };
   }
 
   render() {
     return (
-      <div className="input-container">
+      <div className="screen-container">
         <h2>Screen Container</h2>
       </div>
     );
