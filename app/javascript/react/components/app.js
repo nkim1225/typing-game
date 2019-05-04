@@ -1,7 +1,15 @@
 import React from 'react';
+import { Router, browserHistory, Route } from 'react-router';
+import GameContainer from './../containers/GameContainer';
 
 export const App = props => {
-  return <h1>Make It So React</h1>;
+  return (
+    <div>
+      <Router history={browserHistory}>
+        <Route path="/" component={GameContainer} />
+      </Router>
+    </div>
+  );
 };
 
 export default App;

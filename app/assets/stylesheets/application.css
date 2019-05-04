@@ -15,3 +15,15 @@
  *= require foundation_and_overrides
 
  */
+
+.game-container,
+.screen-container,
+.input-container,
+.score-container {
+  margin: 10px;
+  border: black solid 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
