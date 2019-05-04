@@ -28,8 +28,16 @@
   text-align: center;
 }
 .screen-container {
+  display: flex;
+  flex-direction: column;
   height: 700px;
   margin: 10px 10%;
+  justify-content: space-around;
+}
+.game-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .input-container {
   margin: 10px 30%;

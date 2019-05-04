@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
+import GameTile from './../components/GameTile';
 
 class ScreenContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      board: this.props.board,
-    };
   }
-
   render() {
+    let row;
+    let board = this.props.board.map(row => {
+      return row.map(tile => {
+        if (tile.value === 'EMPTY') {
+          return <GameTile key={tile.key} character="X" />;
+        }
+      });
+    });
     return (
       <div className="screen-container">
-        <h2>Screen Container</h2>
+        <div className="game-row">{board[0]}</div>
+        <div className="game-row">{board[1]}</div>
+        <div className="game-row">{board[2]}</div>
+        <div className="game-row">{board[3]}</div>
+        <div className="game-row">{board[4]}</div>
       </div>
     );
   }
