@@ -46,5 +46,8 @@
   margin: 10px 20%;
   height: 200px;
 }
+.start-button {
+  margin: 10px 25%;
+}
 .game-tile {
 }

@@ -12,20 +12,24 @@ class InputContainer extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
   handleOnChange(event) {
-    if (event.target.value == this.props.word) {
-      this.setState({ input: '' });
-      this.props.killMonster();
-    } else {
-      this.setState({ input: event.target.value });
+    if (this.props.started) {
+      if (event.target.value === this.props.word) {
+        this.setState({ input: '' });
+        this.props.killMonster();
+      } else {
+        this.setState({ input: event.target.value });
+      }
     }
   }
   handleKeyDown(event) {
-    if (event.keyCode === 38) {
-      this.props.movePlayer('UP');
-      this.setState({ input: '' });
-    } else if (event.keyCode === 40) {
-      this.props.movePlayer('DOWN');
-      this.setState({ input: '' });
+    if (this.props.started) {
+      if (event.keyCode === 38) {
+        this.props.movePlayer('UP');
+        this.setState({ input: '' });
+      } else if (event.keyCode === 40) {
+        this.props.movePlayer('DOWN');
+        this.setState({ input: '' });
+      }
     }
   }
   render() {
