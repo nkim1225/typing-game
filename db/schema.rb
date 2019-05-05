@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_04_193554) do
+ActiveRecord::Schema.define(version: 2019_05_05_214239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "enemies", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "value", null: false
+    t.string "value", null: false
     t.bigint "level_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "word", null: false
     t.index ["level_id"], name: "index_enemies_on_level_id"
   end
 
@@ -28,6 +29,8 @@ ActiveRecord::Schema.define(version: 2019_05_04_193554) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
+    t.integer "level", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -10,48 +10,95 @@ class GameContainer extends Component {
       board: emptyBoard(),
       playerPosition: 2,
       started: false,
+      time: 0,
+      level: 1,
+      currentEnemies: [],
+      nextEnemies: [],
     };
     this.movePlayer = this.movePlayer.bind(this);
-    this.findMonster = this.findMonster.bind(this);
+    this.findMonsters = this.findMonsters.bind(this);
     this.killMonster = this.killMonster.bind(this);
     this.advanceMonsters = this.advanceMonsters.bind(this);
     this.start = this.start.bind(this);
+    this.fetchLevel = this.fetchLevel.bind(this);
+    this.spawnEnemy = this.spawnEnemy.bind(this);
+  }
+  spawnEnemy() {
+    let randomRow = Math.floor(Math.random() * 5);
+    let rowCopy = [...this.state.currentEnemies];
+    let boardCopy = [...this.state.board];
+    let enemy = rowCopy.pop();
+  }
+  fetchLevel(level) {
+    fetch(`/api/v1/levels/${level}`)
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status}(${response.statusText})`,
+            error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ currentEnemies: body.enemies });
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   start() {
-    this.interval = setInterval(() => this.advanceMonsters(), 3000);
+    this.fetchLevel(1);
+    this.interval = setInterval(() => {
+      this.setState({ time: this.state.time + 1 });
+      if (this.state.time !== 0 && this.state.time % 2 === 0) {
+        this.advanceMonsters();
+        this.spawnEnemy();
+      }
+    }, 1000);
     this.setState({ started: true });
   }
 
-  findMonster(row) {
-    let monster = { monster: null, index: 8 };
+  findMonsters(row) {
+    let monsters = [];
     this.state.board[row].forEach((tile, index) => {
-      if (tile.value !== GAME_PLAYER && tile.value !== GAME_EMPTY) {
-        monster = { monster: tile, index: index };
+      if (tile.name !== GAME_PLAYER && tile.name !== GAME_EMPTY) {
+        monsters.push({ tile: tile, index: index });
       }
     });
-    return monster;
+    return monsters;
   }
 
   advanceMonsters() {
     let copy = [...this.state.board];
-    let monster;
+    let monsters;
     for (let i = 0; i < 5; i++) {
-      monster = this.findMonster(i);
-      if (monster.monster !== null && monster.index < 7) {
-        copy[i][monster.index].value = GAME_EMPTY;
-        copy[i][monster.index + 1].value = GAME_TOM;
-      }
+      monsters = this.findMonsters(i);
+      monsters.forEach(element => {
+        if (element !== null && element.index < 7) {
+          copy[i][element.index] = {
+            key: copy[i][element.index].key,
+            name: GAME_EMPTY,
+            value: '-',
+            word: '',
+          };
+          element.tile.key = copy[i][element.index + 1].key;
+          copy[i][element.index + 1] = element.tile;
+        }
+      });
     }
     this.setState({ board: copy });
   }
 
   killMonster() {
     let copy = [...this.state.board];
-    copy[this.state.playerPosition].forEach(tile => {
-      if (tile.value !== GAME_PLAYER && tile.value !== GAME_EMPTY) {
-        tile.value = GAME_EMPTY;
-      }
-    });
+    let monsters = this.findMonsters(this.state.playerPosition);
+    let monster = monsters[monsters.length - 1];
+    copy[this.state.playerPosition][monster.index] = {
+      name: GAME_EMPTY,
+      value: '-',
+      word: '',
+      key: copy[this.state.playerPosition][monster.index].key,
+    };
     this.setState({ board: copy });
   }
 
@@ -63,20 +110,40 @@ class GameContainer extends Component {
     let copy = [...this.state.board];
     let playerPosition = this.state.playerPosition;
     if (value === 'UP' && playerPosition !== 0) {
-      copy[playerPosition][7].value = GAME_EMPTY;
-      copy[playerPosition - 1][7].value = GAME_PLAYER;
+      copy[playerPosition][7] = {
+        key: copy[playerPosition][7].key,
+        name: GAME_EMPTY,
+        value: '-',
+        word: '',
+      };
+      copy[playerPosition - 1][7] = {
+        key: copy[playerPosition - 1][7],
+        word: '',
+        name: GAME_PLAYER,
+        value: '[+]',
+      };
       this.setState({ board: copy, playerPosition: playerPosition - 1 });
     } else if (value === 'DOWN' && this.state.playerPosition !== 4) {
-      copy[playerPosition][7].value = GAME_EMPTY;
-      copy[playerPosition + 1][7].value = GAME_PLAYER;
+      copy[playerPosition][7] = {
+        key: copy[playerPosition][7].key,
+        name: GAME_EMPTY,
+        value: '-',
+        word: '',
+      };
+      copy[playerPosition + 1][7] = {
+        key: copy[playerPosition - 1][7],
+        word: '',
+        name: GAME_PLAYER,
+        value: '[+]',
+      };
       this.setState({ board: copy, playerPosition: playerPosition + 1 });
     }
   }
   render() {
-    let monster = this.findMonster(this.state.playerPosition);
-    let word = ' ';
-    if (monster.monster !== null) {
-      word = 'TOM';
+    let word = '';
+    let monsters = this.findMonsters(this.state.playerPosition);
+    if (monsters.length !== 0) {
+      word = monsters[monsters.length - 1].tile.word;
     }
     return (
       <div className="game-container">
