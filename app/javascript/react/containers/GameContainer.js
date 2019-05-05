@@ -13,18 +13,30 @@ class GameContainer extends Component {
     this.movePlayer = this.movePlayer.bind(this);
     this.findMonster = this.findMonster.bind(this);
     this.killMonster = this.killMonster.bind(this);
+    this.advanceMonsters = this.advanceMonsters.bind(this);
   }
-
   findMonster(row) {
-    let monster = null;
-    this.state.board[row].forEach(tile => {
+    let monster = { monster: null, index: 8 };
+    this.state.board[row].forEach((tile, index) => {
       if (tile.value !== GAME_PLAYER && tile.value !== GAME_EMPTY) {
-        monster = tile;
+        monster = { monster: tile, index: index };
       }
     });
     return monster;
   }
 
+  advanceMonsters() {
+    let copy = [...this.state.board];
+    let monster;
+    for (let i = 0; i < 5; i++) {
+      monster = this.findMonster(i);
+      if (monster.monster !== null && monster.index < 7) {
+        copy[i][monster.index].value = GAME_EMPTY;
+        copy[i][monster.index + 1].value = GAME_TOM;
+      }
+    }
+    this.setState({ board: copy });
+  }
   killMonster() {
     let copy = [...this.state.board];
     copy[this.state.playerPosition].forEach(tile => {
@@ -34,6 +46,14 @@ class GameContainer extends Component {
     });
     this.setState({ board: copy });
   }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.advanceMonsters(), 3000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   movePlayer(value) {
     let copy = [...this.state.board];
     let playerPosition = this.state.playerPosition;
@@ -50,7 +70,7 @@ class GameContainer extends Component {
   render() {
     let monster = this.findMonster(this.state.playerPosition);
     let word = ' ';
-    if (monster !== null) {
+    if (monster.monster !== null) {
       word = 'TOM';
     }
     return (
