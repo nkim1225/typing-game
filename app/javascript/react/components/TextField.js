@@ -9,6 +9,7 @@ const TextField = props => {
         name={props.inputName}
         value={props.value}
         onChange={props.handleOnChange}
+        onKeyUp={props.handleKeyDown}
       />
     </div>
   );

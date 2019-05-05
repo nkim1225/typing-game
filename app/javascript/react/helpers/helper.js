@@ -1,5 +1,6 @@
 export const GAME_EMPTY = 'EMPTY';
-export const GAME_GOLBLIN = 'GOBLIN';
+export const GAME_TOM = 'TOM';
+export const GAME_PLAYER = 'PLAYER';
 
 export const emptyBoard = () => {
   let board = [];
@@ -8,11 +9,12 @@ export const emptyBoard = () => {
     innerBoard = [];
     for (let j = 0; j < 8; j++) {
       innerBoard.push({
-        value: 'EMPTY',
-        key: `${i}${j}`
+        value: GAME_EMPTY,
+        key: `${i}${j}`,
       });
     }
     board.push(innerBoard);
   }
+  board[2][7].value = GAME_PLAYER;
   return board;
 };

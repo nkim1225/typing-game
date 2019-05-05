@@ -10,7 +10,9 @@ class ScreenContainer extends Component {
     let board = this.props.board.map(row => {
       return row.map(tile => {
         if (tile.value === 'EMPTY') {
-          return <GameTile key={tile.key} character="X" />;
+          return <GameTile key={tile.key} character="-" />;
+        } else if (tile.value === 'PLAYER') {
+          return <GameTile key={tile.key} character="[+]" />;
         }
       });
     });
