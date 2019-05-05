@@ -16,5 +16,6 @@ export const emptyBoard = () => {
     board.push(innerBoard);
   }
   board[2][7].value = GAME_PLAYER;
+  board[1][0].value = GAME_TOM;
   return board;
 };
