@@ -6,13 +6,18 @@ class InputContainer extends Component {
     super(props);
     this.state = {
       input: '',
-      solution: '',
+      solution: this.props.word,
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
   handleOnChange(event) {
-    this.setState({ input: event.target.value });
+    if (event.target.value == this.props.word) {
+      this.setState({ input: '' });
+      this.props.killMonster();
+    } else {
+      this.setState({ input: event.target.value });
+    }
   }
   handleKeyDown(event) {
     if (event.keyCode === 38) {
@@ -24,10 +29,9 @@ class InputContainer extends Component {
     }
   }
   render() {
-    console.log(this.state.input);
     return (
       <div className="input-container">
-        <h2>Input Container</h2>
+        <h2>{this.props.word}</h2>
         <TextField
           lableName="input"
           inputName="input"
