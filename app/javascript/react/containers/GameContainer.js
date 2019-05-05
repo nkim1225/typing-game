@@ -9,12 +9,19 @@ class GameContainer extends Component {
     this.state = {
       board: emptyBoard(),
       playerPosition: 2,
+      started: false,
     };
     this.movePlayer = this.movePlayer.bind(this);
     this.findMonster = this.findMonster.bind(this);
     this.killMonster = this.killMonster.bind(this);
     this.advanceMonsters = this.advanceMonsters.bind(this);
+    this.start = this.start.bind(this);
   }
+  start() {
+    this.interval = setInterval(() => this.advanceMonsters(), 3000);
+    this.setState({ started: true });
+  }
+
   findMonster(row) {
     let monster = { monster: null, index: 8 };
     this.state.board[row].forEach((tile, index) => {
@@ -37,6 +44,7 @@ class GameContainer extends Component {
     }
     this.setState({ board: copy });
   }
+
   killMonster() {
     let copy = [...this.state.board];
     copy[this.state.playerPosition].forEach(tile => {
@@ -47,9 +55,6 @@ class GameContainer extends Component {
     this.setState({ board: copy });
   }
 
-  componentDidMount() {
-    this.interval = setInterval(() => this.advanceMonsters(), 3000);
-  }
   componentWillUnmount() {
     clearInterval(this.interval);
   }
@@ -77,8 +82,13 @@ class GameContainer extends Component {
       <div className="game-container">
         <h2>Game Container</h2>
         <ScreenContainer board={this.state.board} playerPosition={this.state.playerPosition} />
-        <InputContainer word={word} killMonster={this.killMonster} movePlayer={this.movePlayer} />
-        <ScoreContainer />
+        <InputContainer
+          word={word}
+          killMonster={this.killMonster}
+          movePlayer={this.movePlayer}
+          started={this.state.started}
+        />
+        <ScoreContainer start={this.start} />
       </div>
     );
   }
