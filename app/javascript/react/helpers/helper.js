@@ -9,17 +9,19 @@ export const emptyBoard = () => {
     innerBoard = [];
     for (let j = 0; j < 8; j++) {
       innerBoard.push({
-        value: GAME_EMPTY,
+        name: GAME_EMPTY,
+        value: '-',
         key: `${i}${j}`,
+        word: '',
       });
     }
     board.push(innerBoard);
   }
-  board[2][7].value = GAME_PLAYER;
+  board[2][7].value = '[+]';
 
   // TEST MONSTERS * DELETE *
-  board[1][0].value = GAME_TOM;
-  board[4][0].value = GAME_TOM;
+  board[1][0] = { key: board[1][0].key, name: 'TOM', value: '*', word: 'berry' };
+  board[1][3] = { key: board[1][3].key, name: 'TOM', value: '*', word: 'tom' };
 
   return board;
 };

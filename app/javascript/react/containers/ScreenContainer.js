@@ -11,11 +11,15 @@ class ScreenContainer extends Component {
       return row.map(tile => {
         if (tile.value === 'EMPTY') {
           return <GameTile key={tile.key} character=" - " />;
-        } else if (tile.value === 'PLAYER') {
-          return <GameTile key={tile.key} character=" + " />;
-        } else if (tile.value === 'TOM') {
-          return <GameTile key={tile.key} character=" * " />;
+        } else {
+          return <GameTile key={tile.key} character={tile.value} />;
         }
+
+        // else if (tile.value === 'PLAYER') {
+        //   return <GameTile key={tile.key} character=" + " />;
+        // } else if (tile.value === 'TOM') {
+        //   return <GameTile key={tile.key} character=" * " />;
+        // }
       });
     });
     return (

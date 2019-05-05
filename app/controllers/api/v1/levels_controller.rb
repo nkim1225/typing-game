@@ -2,6 +2,7 @@ class Api::V1::LevelsController < ApplicationController
   protect_from_forgery with: :exception
 
   def show
-    binding.pry
+    level = Level.find_by(level: params[:id])
+    render json: {level: level, enemies: level.enemies}
   end
 end
