@@ -50,7 +50,7 @@ class GameContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ currentEnemies: body.enemies });
+        this.setState({ currentEnemies: body });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
