@@ -20,8 +20,16 @@ export const emptyBoard = () => {
   board[2][7].value = '[+]';
 
   // TEST MONSTERS * DELETE *
-  board[1][0] = { key: board[1][0].key, name: 'TOM', value: '*', word: 'berry' };
-  board[1][3] = { key: board[1][3].key, name: 'TOM', value: '*', word: 'tom' };
-
+  // board[0][0] = { key: board[0][0].key, name: 'TOM', value: '[*]', word: 'berry' };
+  // board[1][0] = { key: board[1][0].key, name: 'TOM', value: '[*]', word: 'berry' };
+  // board[2][0] = { key: board[2][0].key, name: 'TOM', value: '[*]', word: 'tom' };
+  // board[3][0] = { key: board[3][0].key, name: 'TOM', value: '[*]', word: 'tom' };
+  // board[4][0] = { key: board[4][0].key, name: 'TOM', value: '[*]', word: 'tom' };
+  //
+  // board[0][1] = { key: board[0][1].key, name: 'TOM', value: '[*]', word: 'tom' };
+  // board[1][1] = { key: board[1][1].key, name: 'TOM', value: '[*]', word: 'tom' };
+  // board[2][1] = { key: board[2][1].key, name: 'TOM', value: '[*]', word: 'tom' };
+  // board[3][1] = { key: board[3][1].key, name: 'TOM', value: '[*]', word: 'tom' };
+  // board[4][1] = { key: board[4][1].key, name: 'TOM', value: '[*]', word: 'tom' };
   return board;
 };

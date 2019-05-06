@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_05_05_214239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "word", null: false
+    t.string "key", null: false
     t.index ["level_id"], name: "index_enemies_on_level_id"
   end
 

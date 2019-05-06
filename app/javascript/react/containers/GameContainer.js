@@ -23,11 +23,19 @@ class GameContainer extends Component {
     this.fetchLevel = this.fetchLevel.bind(this);
     this.spawnEnemy = this.spawnEnemy.bind(this);
   }
-  spawnEnemy() {
+  spawnEnemy(board) {
     let randomRow = Math.floor(Math.random() * 5);
     let rowCopy = [...this.state.currentEnemies];
-    let boardCopy = [...this.state.board];
-    let enemy = rowCopy.pop();
+    //let enemy = { name: 'TOM', value: '[*]', word: 'tom', key: '' };
+    let spawnList = [...this.state.currentEnemies];
+    if (spawnList.length !== 0) {
+      let enemy = spawnList.shift();
+      this.setState({ currentEnemies: spawnList });
+      let currentKey = board[randomRow][0].key;
+      board[randomRow][0] = enemy;
+      board[randomRow][0].key = currentKey;
+    }
+    return board;
   }
   fetchLevel(level) {
     fetch(`/api/v1/levels/${level}`)
@@ -52,7 +60,6 @@ class GameContainer extends Component {
       this.setState({ time: this.state.time + 1 });
       if (this.state.time !== 0 && this.state.time % 2 === 0) {
         this.advanceMonsters();
-        this.spawnEnemy();
       }
     }, 1000);
     this.setState({ started: true });
@@ -71,22 +78,28 @@ class GameContainer extends Component {
   advanceMonsters() {
     let copy = [...this.state.board];
     let monsters;
+    let element;
     for (let i = 0; i < 5; i++) {
       monsters = this.findMonsters(i);
-      monsters.forEach(element => {
-        if (element !== null && element.index < 7) {
-          copy[i][element.index] = {
-            key: copy[i][element.index].key,
-            name: GAME_EMPTY,
-            value: '-',
-            word: '',
-          };
-          element.tile.key = copy[i][element.index + 1].key;
-          copy[i][element.index + 1] = element.tile;
-        }
-      });
+      if (monsters.length !== 0) {
+        monsters.reverse();
+        monsters.forEach(item => {
+          if (item.index !== 7) {
+            let currentKey = copy[i][item.index].key;
+            let nextKey = copy[i][item.index + 1].key;
+            item.tile.key = nextKey;
+            copy[i][item.index] = {
+              name: GAME_EMPTY,
+              value: '-',
+              key: currentKey,
+              word: '',
+            };
+            copy[i][item.index + 1] = item.tile;
+          }
+        });
+      }
     }
-    this.setState({ board: copy });
+    this.setState({ board: this.spawnEnemy(copy) });
   }
 
   killMonster() {
@@ -117,7 +130,7 @@ class GameContainer extends Component {
         word: '',
       };
       copy[playerPosition - 1][7] = {
-        key: copy[playerPosition - 1][7],
+        key: copy[playerPosition - 1][7].key,
         word: '',
         name: GAME_PLAYER,
         value: '[+]',
@@ -131,7 +144,7 @@ class GameContainer extends Component {
         word: '',
       };
       copy[playerPosition + 1][7] = {
-        key: copy[playerPosition - 1][7],
+        key: copy[playerPosition + 1][7].key,
         word: '',
         name: GAME_PLAYER,
         value: '[+]',
