@@ -22,11 +22,11 @@ class InputContainer extends Component {
     }
   }
   handleKeyDown(event) {
-    if (this.props.started) {
+    if (this.props.started && this.props.life) {
       if (event.keyCode === 38) {
         this.props.movePlayer('UP');
         this.setState({ input: '' });
-      } else if (event.keyCode === 40) {
+      } else if (event.keyCode === 40 || event.keyCode === 13) {
         this.props.movePlayer('DOWN');
         this.setState({ input: '' });
       }

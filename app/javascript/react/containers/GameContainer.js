@@ -14,6 +14,7 @@ class GameContainer extends Component {
       level: 1,
       currentEnemies: [],
       nextEnemies: [],
+      life: true,
     };
     this.movePlayer = this.movePlayer.bind(this);
     this.findMonsters = this.findMonsters.bind(this);
@@ -22,11 +23,30 @@ class GameContainer extends Component {
     this.start = this.start.bind(this);
     this.fetchLevel = this.fetchLevel.bind(this);
     this.spawnEnemy = this.spawnEnemy.bind(this);
+    this.gameOver = this.gameOver.bind(this);
+    this.allClear = this.allClear.bind(this);
+  }
+  allClear() {
+    let output = true;
+    for (let i = 0; i < this.state.board.length - 1; i++) {
+      if (this.findMonsters(i).length !== 0) {
+        output = false;
+      }
+    }
+    return output;
+  }
+  gameOver(input) {
+    clearInterval(this.interval);
+    if (input) {
+      alert('LEVEL DONE');
+      this.setState({ started: false });
+    } else {
+      alert('GAME OVER');
+      this.setState({ life: false });
+    }
   }
   spawnEnemy(board) {
     let randomRow = Math.floor(Math.random() * 5);
-    let rowCopy = [...this.state.currentEnemies];
-    //let enemy = { name: 'TOM', value: '[*]', word: 'tom', key: '' };
     let spawnList = [...this.state.currentEnemies];
     if (spawnList.length !== 0) {
       let enemy = spawnList.shift();
@@ -34,6 +54,9 @@ class GameContainer extends Component {
       let currentKey = board[randomRow][0].key;
       board[randomRow][0] = enemy;
       board[randomRow][0].key = currentKey;
+    } else if (spawnList.length === 0 && this.allClear()) {
+      console.log('EMPTY');
+      this.gameOver(true);
     }
     return board;
   }
@@ -67,7 +90,8 @@ class GameContainer extends Component {
 
   findMonsters(row) {
     let monsters = [];
-    this.state.board[row].forEach((tile, index) => {
+    let copyRow = [...this.state.board[row]];
+    copyRow.forEach((tile, index) => {
       if (tile.name !== GAME_PLAYER && tile.name !== GAME_EMPTY) {
         monsters.push({ tile: tile, index: index });
       }
@@ -84,7 +108,7 @@ class GameContainer extends Component {
       if (monsters.length !== 0) {
         monsters.reverse();
         monsters.forEach(item => {
-          if (item.index !== 7) {
+          if (item.index < 7) {
             let currentKey = copy[i][item.index].key;
             let nextKey = copy[i][item.index + 1].key;
             item.tile.key = nextKey;
@@ -95,6 +119,8 @@ class GameContainer extends Component {
               word: '',
             };
             copy[i][item.index + 1] = item.tile;
+          } else if (item.index >= 7) {
+            this.gameOver(false);
           }
         });
       }
@@ -136,20 +162,30 @@ class GameContainer extends Component {
         value: '[+]',
       };
       this.setState({ board: copy, playerPosition: playerPosition - 1 });
-    } else if (value === 'DOWN' && this.state.playerPosition !== 4) {
+    } else if (value === 'DOWN') {
       copy[playerPosition][7] = {
         key: copy[playerPosition][7].key,
         name: GAME_EMPTY,
         value: '-',
         word: '',
       };
-      copy[playerPosition + 1][7] = {
-        key: copy[playerPosition + 1][7].key,
-        word: '',
-        name: GAME_PLAYER,
-        value: '[+]',
-      };
-      this.setState({ board: copy, playerPosition: playerPosition + 1 });
+      if (this.state.playerPosition !== 4) {
+        copy[playerPosition + 1][7] = {
+          key: copy[playerPosition + 1][7].key,
+          word: '',
+          name: GAME_PLAYER,
+          value: '[+]',
+        };
+        this.setState({ board: copy, playerPosition: playerPosition + 1 });
+      } else {
+        copy[0][7] = {
+          key: copy[0][7].key,
+          word: '',
+          name: GAME_PLAYER,
+          value: '[+]',
+        };
+        this.setState({ board: copy, playerPosition: 0 });
+      }
     }
   }
   render() {
@@ -167,6 +203,7 @@ class GameContainer extends Component {
           killMonster={this.killMonster}
           movePlayer={this.movePlayer}
           started={this.state.started}
+          life={this.state.life}
         />
         <ScoreContainer start={this.start} />
       </div>
