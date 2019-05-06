@@ -4,6 +4,6 @@ class Enemy < ApplicationRecord
   validates :word, presence: true
   validates :level_id, presence: true
 
-
   belongs_to :level
+
 end

@@ -3,6 +3,6 @@ class Api::V1::LevelsController < ApplicationController
 
   def show
     level = Level.find_by(level: params[:id])
-    render json: {level: level, enemies: level.enemies}
+    render json: level.enemies
   end
 end
