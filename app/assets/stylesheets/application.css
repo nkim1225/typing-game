@@ -32,6 +32,7 @@
   flex-direction: column;
   margin: 10px 10%;
   justify-content: space-around;
+  height: 75%;
 }
 .game-row {
   display: flex;
@@ -40,13 +41,26 @@
 }
 .input-container {
   margin: 10px 30%;
+  height: 10%;
+  flex-grow: 1;
 }
 .score-container {
   margin: 10px 20%;
-  height: 200px;
+  height: 15%;
 }
 .start-button {
   margin: 10px 25%;
 }
 .game-tile {
+  width: 12.5%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.game-container {
+  height: 1000px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }

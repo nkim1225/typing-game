@@ -9,11 +9,7 @@ class GameTile extends Component {
   }
 
   render() {
-    return (
-      <div className="game-tile">
-        <h4>{this.props.character}</h4>
-      </div>
-    );
+    return <div className="game-tile">{this.props.character}</div>;
   }
 }
 
