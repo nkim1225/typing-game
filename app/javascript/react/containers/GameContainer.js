@@ -73,7 +73,11 @@ class GameContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        debugger;
+        let randomWords = require('random-words');
+        body = body.map(enemy => {
+          enemy.word = randomWords();
+          return enemy;
+        });
         this.setState({ currentEnemies: body });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
