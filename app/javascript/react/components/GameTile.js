@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ground from './ground.PNG';
 
 class GameTile extends Component {
   constructor(props) {
@@ -9,7 +10,28 @@ class GameTile extends Component {
   }
 
   render() {
-    return <div className="game-tile">{this.props.character}</div>;
+    if (this.props.character === '[+]') {
+      return (
+        <div className="game-tile">
+          <div className="in-tile">{this.props.character}</div>
+        </div>
+      );
+    }
+    if (this.props.character === '-') {
+      return (
+        <div className="game-tile">
+          <div className="in-tile">-</div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="game-tile">
+          <div className="zombie">
+            <img src={this.props.character} alt="zombie" />
+          </div>
+        </div>
+      );
+    }
   }
 }
 

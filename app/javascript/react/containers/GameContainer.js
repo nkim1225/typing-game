@@ -83,6 +83,7 @@ class GameContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   start() {
+    document.getElementsByName('input')[0].focus();
     this.fetchLevel(this.state.level);
     this.interval = setInterval(() => {
       this.setState({ time: this.state.time + 1 });
