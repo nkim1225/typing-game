@@ -55,8 +55,8 @@ class GameContainer extends Component {
       board[randomRow][0] = enemy;
       board[randomRow][0].key = currentKey;
     } else if (spawnList.length === 0 && this.allClear()) {
-      console.log('EMPTY');
       this.gameOver(true);
+      this.setState({ level: this.state.level + 1 });
     }
     return board;
   }
@@ -83,7 +83,7 @@ class GameContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   start() {
-    this.fetchLevel(1);
+    this.fetchLevel(this.state.level);
     this.interval = setInterval(() => {
       this.setState({ time: this.state.time + 1 });
       if (this.state.time !== 0 && this.state.time % 2 === 0) {
@@ -153,7 +153,7 @@ class GameContainer extends Component {
   movePlayer(value) {
     let copy = [...this.state.board];
     let playerPosition = this.state.playerPosition;
-    if (value === 'UP' && playerPosition !== 0) {
+    if (value === 'UP' && playerPosition !== 0 && copy[playerPosition - 1][7].name !== GAME_TOM) {
       copy[playerPosition][7] = {
         key: copy[playerPosition][7].key,
         name: GAME_EMPTY,
@@ -174,7 +174,7 @@ class GameContainer extends Component {
         value: '-',
         word: '',
       };
-      if (this.state.playerPosition !== 4) {
+      if (this.state.playerPosition !== 4 && copy[playerPosition + 1][7].name !== GAME_TOM) {
         copy[playerPosition + 1][7] = {
           key: copy[playerPosition + 1][7].key,
           word: '',

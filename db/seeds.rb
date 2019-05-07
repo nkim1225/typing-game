@@ -10,6 +10,7 @@ Level.destroy_all
 Enemy.destroy_all
 
 level_1 = Level.create(name: "level one", level: 1, description: "test level 1")
+level_2 = Level.create(name: "level one", level: 2, description: "test level 2")
 
 Enemy.create(key: "", name: "TOM", level: level_1, value: "[*]", word: "TOM")
 Enemy.create(key: "", name: "TOM", level: level_1, value: "[*]", word: "TOM")
@@ -20,3 +21,13 @@ Enemy.create(key: "", name: "TOM", level: level_1, value: "[*]", word: "TOM")
 Enemy.create(key: "", name: "TOM", level: level_1, value: "[*]", word: "TOM")
 Enemy.create(key: "", name: "TOM", level: level_1, value: "[*]", word: "TOM")
 Enemy.create(key: "", name: "TOM", level: level_1, value: "[*]", word: "TOM")
+
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
+Enemy.create(key: "", name: "TOM", level: level_2, value: "[*]", word: "TOM")
