@@ -28,7 +28,7 @@ class GameContainer extends Component {
   }
   allClear() {
     let output = true;
-    for (let i = 0; i < this.state.board.length - 1; i++) {
+    for (let i = 0; i < this.state.board.length; i++) {
       if (this.findMonsters(i).length !== 0) {
         output = false;
       }
@@ -38,7 +38,7 @@ class GameContainer extends Component {
   gameOver(input) {
     clearInterval(this.interval);
     if (input) {
-      alert('LEVEL DONE');
+      alert(`LEVEL ${this.state.level} COMPLETE`);
       this.setState({ started: false });
     } else {
       alert('GAME OVER');
@@ -46,7 +46,7 @@ class GameContainer extends Component {
     }
   }
   spawnEnemy(board) {
-    let randomRow = Math.floor(Math.random() * 5);
+    let randomRow = Math.floor(Math.random() * board.length);
     let spawnList = [...this.state.currentEnemies];
     if (spawnList.length !== 0) {
       let enemy = spawnList.shift();
@@ -75,7 +75,7 @@ class GameContainer extends Component {
       .then(body => {
         let randomWords = require('random-words');
         body = body.map(enemy => {
-          enemy.word = randomWords();
+          enemy.word = randomWords({ exactly: this.state.level, join: ' ' });
           return enemy;
         });
         this.setState({ currentEnemies: body });
@@ -109,12 +109,12 @@ class GameContainer extends Component {
     let copy = [...this.state.board];
     let monsters;
     let element;
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < copy.length; i++) {
       monsters = this.findMonsters(i);
       if (monsters.length !== 0) {
         monsters.reverse();
         monsters.forEach(item => {
-          if (item.index < 7) {
+          if (item.index < copy[0].length - 1) {
             let currentKey = copy[i][item.index].key;
             let nextKey = copy[i][item.index + 1].key;
             item.tile.key = nextKey;
@@ -125,7 +125,7 @@ class GameContainer extends Component {
               word: '',
             };
             copy[i][item.index + 1] = item.tile;
-          } else if (item.index >= 7) {
+          } else if (item.index >= copy[0].length - 1) {
             this.gameOver(false);
           }
         });
@@ -154,38 +154,45 @@ class GameContainer extends Component {
   movePlayer(value) {
     let copy = [...this.state.board];
     let playerPosition = this.state.playerPosition;
-    if (value === 'UP' && playerPosition !== 0 && copy[playerPosition - 1][7].name !== GAME_TOM) {
-      copy[playerPosition][7] = {
-        key: copy[playerPosition][7].key,
+    if (
+      value === 'UP' &&
+      playerPosition !== 0 &&
+      copy[playerPosition - 1][copy[0].length - 1].name !== GAME_TOM
+    ) {
+      copy[playerPosition][copy[0].length - 1] = {
+        key: copy[playerPosition][copy[0].length - 1].key,
         name: GAME_EMPTY,
         value: '-',
         word: '',
       };
-      copy[playerPosition - 1][7] = {
-        key: copy[playerPosition - 1][7].key,
+      copy[playerPosition - 1][copy[0].length - 1] = {
+        key: copy[playerPosition - 1][copy[0].length - 1].key,
         word: '',
         name: GAME_PLAYER,
         value: '[+]',
       };
       this.setState({ board: copy, playerPosition: playerPosition - 1 });
     } else if (value === 'DOWN') {
-      copy[playerPosition][7] = {
-        key: copy[playerPosition][7].key,
+      copy[playerPosition][copy[0].length - 1] = {
+        key: copy[playerPosition][copy[0].length - 1].key,
         name: GAME_EMPTY,
         value: '-',
         word: '',
       };
-      if (this.state.playerPosition !== 4 && copy[playerPosition + 1][7].name !== GAME_TOM) {
-        copy[playerPosition + 1][7] = {
-          key: copy[playerPosition + 1][7].key,
+      if (
+        this.state.playerPosition !== 4 &&
+        copy[playerPosition + 1][copy[0].length - 1].name !== GAME_TOM
+      ) {
+        copy[playerPosition + 1][copy[0].length - 1] = {
+          key: copy[playerPosition + 1][copy[0].length - 1].key,
           word: '',
           name: GAME_PLAYER,
           value: '[+]',
         };
         this.setState({ board: copy, playerPosition: playerPosition + 1 });
       } else {
-        copy[0][7] = {
-          key: copy[0][7].key,
+        copy[0][copy[0].length - 1] = {
+          key: copy[0][copy[0].length - 1].key,
           word: '',
           name: GAME_PLAYER,
           value: '[+]',
