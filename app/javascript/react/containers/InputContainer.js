@@ -12,7 +12,8 @@ class InputContainer extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
   handleOnChange(event) {
-    if (this.props.started) {
+    let subString = event.target.value;
+    if (this.props.started && this.props.word.includes(subString)) {
       if (event.target.value === this.props.word) {
         this.setState({ input: '' });
         this.props.killMonster();
