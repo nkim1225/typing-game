@@ -7,7 +7,7 @@ export const emptyBoard = () => {
   let innerBoard = [];
   for (let i = 0; i < 5; i++) {
     innerBoard = [];
-    for (let j = 0; j < 8; j++) {
+    for (let j = 0; j < 15; j++) {
       innerBoard.push({
         name: GAME_EMPTY,
         value: '-',
@@ -17,7 +17,7 @@ export const emptyBoard = () => {
     }
     board.push(innerBoard);
   }
-  board[2][7].value = '[+]';
+  board[2][14].value = '[+]';
 
   // TEST MONSTERS * DELETE *
   // board[0][0] = { key: board[0][0].key, name: 'TOM', value: '[*]', word: 'berry' };
