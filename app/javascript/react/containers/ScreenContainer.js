@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import GameTile from './../components/GameTile';
-//import background from './../../../assets/images/gameBackground.png';
-import background from './../../../assets/images/darkBackground.png';
 
 class ScreenContainer extends Component {
   constructor(props) {

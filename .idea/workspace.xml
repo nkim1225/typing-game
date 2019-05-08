@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33551a46-3e8e-405d-aba2-1f5f69fcfda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/components/GameTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/components/GameTile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/components/Zombie.gif" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/zombie.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/components/ground.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/images/ground.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/containers/InputContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/containers/InputContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/containers/ScreenContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/containers/ScreenContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/helpers/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/helpers/helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/webpack/environment.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/webpack/environment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/90027.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/darkBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/gameBackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/assets/images/mainCharacter.gif" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -52,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/javascript/react/containers/InputContainer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+            <state relative-caret-position="392">
+              <caret line="25" column="48" lean-forward="true" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -251,19 +244,18 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72114000" />
+    <option name="totallyTimeSpent" value="72338000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1337" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09491926" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09491926" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32907802" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.082994305" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.082994305" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -562,8 +554,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/javascript/react/containers/InputContainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+        <state relative-caret-position="392">
+          <caret line="25" column="48" lean-forward="true" selection-start-line="25" selection-start-column="48" selection-end-line="25" selection-end-column="48" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
