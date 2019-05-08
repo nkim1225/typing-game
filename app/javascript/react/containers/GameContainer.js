@@ -38,7 +38,7 @@ class GameContainer extends Component {
   gameOver(input) {
     clearInterval(this.interval);
     if (input) {
-      alert('LEVEL DONE');
+      alert(`LEVEL ${this.state.level} COMPLETE`);
       this.setState({ started: false });
     } else {
       alert('GAME OVER');
@@ -75,7 +75,7 @@ class GameContainer extends Component {
       .then(body => {
         let randomWords = require('random-words');
         body = body.map(enemy => {
-          enemy.word = randomWords();
+          enemy.word = randomWords({ exactly: this.state.level, join: ' ' });
           return enemy;
         });
         this.setState({ currentEnemies: body });
