@@ -38,15 +38,14 @@ class InputContainer extends Component {
       <div className="input-container">
         <div className="nes-container with-title is-centered">
           <p className="title">Input</p>
-        <h2>{this.props.word}</h2>
-        <TextField
-          className="nes-input"
-          lableName="input"
-          inputName="input"
-          value={this.state.input}
-          handleOnChange={this.handleOnChange}
-          handleKeyDown={this.handleKeyDown}
-        />
+          <TextField
+            className="nes-input"
+            lableName="input"
+            inputName="input"
+            value={this.state.input}
+            handleOnChange={this.handleOnChange}
+            handleKeyDown={this.handleKeyDown}
+          />
         </div>
       </div>
     );
