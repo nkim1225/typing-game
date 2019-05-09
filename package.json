@@ -4,6 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "~6.24.1",
+    "nes.css": "^2.1.1",
     "prop-types": "~15.6.0",
     "random-words": "^1.1.0",
     "react": "~15.4.2",

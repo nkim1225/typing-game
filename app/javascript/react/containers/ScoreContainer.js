@@ -11,9 +11,13 @@ class ScoreContainer extends Component {
   render() {
     return (
       <div className="score-container">
-        <h2>Score Container</h2>
-        <div className="start-button">
-          <button onClick={this.props.start}>Start</button>
+        <div className="nes-container with-title is-centered">
+          <p className="title">Score Container</p>
+          <div className="start-button">
+            <button className="nes-btn" onClick={this.props.start}>
+              Start
+            </button>
+          </div>
         </div>
       </div>
     );
