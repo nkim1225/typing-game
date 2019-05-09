@@ -6,10 +6,9 @@ class GameTile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      character: '',
+      typed: '',
     };
   }
-
   render() {
     let wordBubble = '';
     if (this.props.firstEnemy) {
@@ -30,7 +29,7 @@ class GameTile extends Component {
       );
     }
     if (this.props.character === '-') {
-      return <div className="game-tile">{/*<div className="in-tile">-</div>*/}-</div>;
+      return <div className="game-tile" />;
     } else {
       return (
         <div className="game-tile">
