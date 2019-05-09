@@ -56,7 +56,14 @@ class GameContainer extends Component {
       board[randomRow][0].key = currentKey;
     } else if (spawnList.length === 0 && this.allClear()) {
       this.gameOver(true);
-      this.setState({ level: this.state.level + 1 });
+      let key = board[this.state.playerPosition][board[0].length - 1].key;
+      board[this.state.playerPosition][board[0].length - 1] = {
+        key: key,
+        value: '-',
+        name: GAME_EMPTY,
+        word: '',
+      };
+      this.setState({ level: this.state.level + 1, board: board });
     }
     return board;
   }
@@ -83,8 +90,13 @@ class GameContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   start() {
+    let copy = this.state.board;
+    copy[2][copy[0].length - 1].value = '[+]';
+    this.setState({ board: copy });
     document.getElementsByName('input')[0].focus();
+
     this.fetchLevel(this.state.level);
+
     this.interval = setInterval(() => {
       this.setState({ time: this.state.time + 1 });
       if (this.state.time !== 0 && this.state.time % 2 === 0) {
@@ -211,14 +223,16 @@ class GameContainer extends Component {
       <div className="game-container">
         <h2>Game Container</h2>
         <ScreenContainer board={this.state.board} playerPosition={this.state.playerPosition} />
-        <InputContainer
-          word={word}
-          killMonster={this.killMonster}
-          movePlayer={this.movePlayer}
-          started={this.state.started}
-          life={this.state.life}
-        />
-        <ScoreContainer start={this.start} />
+        <div id="bottom-panel">
+          <ScoreContainer start={this.start} />
+          <InputContainer
+            word={word}
+            killMonster={this.killMonster}
+            movePlayer={this.movePlayer}
+            started={this.state.started}
+            life={this.state.life}
+          />
+        </div>
       </div>
     );
   }

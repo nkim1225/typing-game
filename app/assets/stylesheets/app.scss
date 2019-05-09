@@ -3,14 +3,15 @@
 .input-container,
 .score-container {
   margin: 10px;
-  border: black solid 1px;
+  //border: black solid 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
 }
 .screen-container {
-  background-image: url('https://www.spriters-resource.com/resources/sheets/40/42920.png');
+  //background-image: url('https://www.spriters-resource.com/resources/sheets/40/42920.png');
+  background-image: url('https://vignette.wikia.nocookie.net/finalfantasy/images/0/0f/FFIV_Battle_Background_Waterway_Land_SNES.png/revision/latest?cb=20100220192624');
   display: flex;
   flex-direction: column;
   margin: 10px 10%;
@@ -25,12 +26,12 @@
   position: relative;
 }
 .input-container {
-  margin: 10px 30%;
-  height: 10%;
+  width: 50%;
+  height: 100%;
 }
 .score-container {
-  margin: 10px 20%;
-  height: 15%;
+  height: 100%;
+  width: 50%;
   position: relative;
 }
 .start-button {
@@ -66,4 +67,10 @@
   position: absolute;
   width: 80%;
   height: 65%;
+}
+#bottom-panel {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 10%;
+  justify-content: flex-start;
 }

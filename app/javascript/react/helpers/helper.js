@@ -17,6 +17,6 @@ export const emptyBoard = () => {
     }
     board.push(innerBoard);
   }
-  board[2][14].value = '[+]';
+  //board[2][14].value = '[+]';
   return board;
 };
