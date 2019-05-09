@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33551a46-3e8e-405d-aba2-1f5f69fcfda1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/assets/stylesheets/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/assets/stylesheets/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/components/GameTile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/components/GameTile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/components/TextField.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/components/TextField.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/containers/GameContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/containers/GameContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/containers/InputContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/containers/InputContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/containers/ScoreContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/containers/ScoreContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/javascript/react/containers/ScreenContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/javascript/react/containers/ScreenContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,7 +15,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/javascript/react/containers/GameContainer.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="473">
@@ -89,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/app.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+            <state relative-caret-position="806">
+              <caret line="110" column="14" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -170,16 +162,16 @@
         <option value="$PROJECT_DIR$/app/javascript/react/containers/ScreenContainer.js" />
         <option value="$PROJECT_DIR$/app/javascript/react/components/TextField.js" />
         <option value="$PROJECT_DIR$/app/javascript/react/components/GameTile.js" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/app.scss" />
         <option value="$PROJECT_DIR$/app/javascript/react/containers/ScoreContainer.js" />
         <option value="$PROJECT_DIR$/app/javascript/react/containers/GameContainer.js" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/app.scss" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+    <option name="y" value="158" />
     <option name="width" value="2560" />
-    <option name="height" value="1337" />
+    <option name="height" value="1202" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -307,7 +299,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90583000" />
+    <option name="totallyTimeSpent" value="91281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="2560" height="1337" extended-state="6" />
@@ -552,13 +544,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/javascript/react/containers/InputContainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -603,6 +588,13 @@
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="806">
+          <caret line="110" column="14" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
         </state>
       </provider>
     </entry>
