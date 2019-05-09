@@ -24,7 +24,7 @@ h2 {
   height: 700px;
 }
 .screen-border {
-  margin: 10px 10%;
+  margin: 0px 10%;
 }
 .game-row {
   display: flex;
@@ -107,7 +107,8 @@ h2 {
   margin: 10px 10%;
   justify-content: flex-start;
 }
-.nes-container.is-rounded.is-dark {
+.screen-border .nes-container.is-rounded.is-dark {
+  padding: 0 0 0.6% 0;
 }
 .nes-balloon.from-left {
   color: black;
