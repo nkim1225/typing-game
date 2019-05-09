@@ -25,6 +25,15 @@ class GameContainer extends Component {
     this.spawnEnemy = this.spawnEnemy.bind(this);
     this.gameOver = this.gameOver.bind(this);
     this.allClear = this.allClear.bind(this);
+    this.targetedEnemy = this.targetedEnemy.bind(this);
+  }
+  targetedEnemy() {
+    let enemy = null;
+    let monsters = this.findMonsters(this.state.playerPosition);
+    if (monsters.length !== 0) {
+      enemy = monsters[monsters.length - 1].tile;
+    }
+    return enemy;
   }
   allClear() {
     let output = true;
@@ -215,14 +224,18 @@ class GameContainer extends Component {
   }
   render() {
     let word = '';
-    let monsters = this.findMonsters(this.state.playerPosition);
-    if (monsters.length !== 0) {
-      word = monsters[monsters.length - 1].tile.word;
+    let enemy = this.targetedEnemy();
+    if (enemy !== null) {
+      word = enemy.word;
     }
     return (
       <div className="game-container">
         <h2>Game Container</h2>
-        <ScreenContainer board={this.state.board} playerPosition={this.state.playerPosition} />
+        <ScreenContainer
+          board={this.state.board}
+          playerPosition={this.state.playerPosition}
+          targetedEnemy={this.targetedEnemy()}
+        />
         <div id="bottom-panel">
           <ScoreContainer start={this.start} />
           <InputContainer

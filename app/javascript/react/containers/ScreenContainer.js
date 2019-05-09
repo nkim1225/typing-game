@@ -7,13 +7,18 @@ class ScreenContainer extends Component {
   }
   render() {
     let row;
+    let firstEnemy;
     let board = this.props.board.map(row => {
       return row.map(tile => {
-        if (tile.value === 'EMPTY') {
-          return <GameTile key={tile.key} character=" - " />;
-        } else {
-          return <GameTile key={tile.key} character={tile.value} />;
-        }
+        firstEnemy = this.props.targetedEnemy !== null && this.props.targetedEnemy.key === tile.key;
+        return (
+          <GameTile
+            key={tile.key}
+            character={tile.value}
+            word={tile.word}
+            firstEnemy={firstEnemy}
+          />
+        );
       });
     });
     return (

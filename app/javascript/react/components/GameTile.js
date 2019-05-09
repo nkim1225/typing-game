@@ -11,6 +11,16 @@ class GameTile extends Component {
   }
 
   render() {
+    let wordBubble = '';
+    if (this.props.firstEnemy) {
+      wordBubble = (
+        <div className="wordBubble">
+          <div className="nes-balloon from-left">
+            <p>{this.props.word}</p>
+          </div>
+        </div>
+      );
+    }
     if (this.props.character === '[+]') {
       return (
         <div className="game-tile">
@@ -25,8 +35,8 @@ class GameTile extends Component {
       return (
         <div className="game-tile">
           {/*<div className="in-tile">*/}
-          <img src={zombie} alt="enemy" />
-          {/*</div>*/}
+          <img className="enemy" src={zombie} alt="enemy" />
+          {wordBubble}
         </div>
       );
     }
