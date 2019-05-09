@@ -73,7 +73,7 @@ class GameContainer extends Component {
         name: GAME_EMPTY,
         word: '',
       };
-      this.setState({ level: this.state.level + 1, board: board });
+      this.setState({ level: this.state.level + 1, board: board, playerPosition: 2 });
     }
     return board;
   }
