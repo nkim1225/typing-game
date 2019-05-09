@@ -22,13 +22,17 @@ class ScreenContainer extends Component {
       });
     });
     return (
-      <div className="screen-container">
-        {/*<img id="background" src={background} alt="background" />*/}
-        <div className="game-row">{board[0]}</div>
-        <div className="game-row">{board[1]}</div>
-        <div className="game-row">{board[2]}</div>
-        <div className="game-row">{board[3]}</div>
-        <div className="game-row">{board[4]}</div>
+      <div className="screen-border">
+        <div className="nes-container is-rounded is-dark">
+          <div className="screen-container">
+            {/*<img id="background" src={background} alt="background" />*/}
+            <div className="game-row">{board[0]}</div>
+            <div className="game-row">{board[1]}</div>
+            <div className="game-row">{board[2]}</div>
+            <div className="game-row">{board[3]}</div>
+            <div className="game-row">{board[4]}</div>
+          </div>
+        </div>
       </div>
     );
   }

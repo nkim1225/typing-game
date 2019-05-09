@@ -15,6 +15,7 @@ class GameContainer extends Component {
       currentEnemies: [],
       nextEnemies: [],
       life: true,
+      score: 0,
     };
     this.movePlayer = this.movePlayer.bind(this);
     this.findMonsters = this.findMonsters.bind(this);
@@ -159,13 +160,14 @@ class GameContainer extends Component {
     let copy = [...this.state.board];
     let monsters = this.findMonsters(this.state.playerPosition);
     let monster = monsters[monsters.length - 1];
+    let score = monster.tile.word.length;
     copy[this.state.playerPosition][monster.index] = {
       name: GAME_EMPTY,
       value: '-',
       word: '',
       key: copy[this.state.playerPosition][monster.index].key,
     };
-    this.setState({ board: copy });
+    this.setState({ board: copy, score: this.state.score + score });
   }
 
   componentWillUnmount() {
@@ -237,7 +239,7 @@ class GameContainer extends Component {
           targetedEnemy={this.targetedEnemy()}
         />
         <div id="bottom-panel">
-          <ScoreContainer start={this.start} />
+          <ScoreContainer start={this.start} score={this.state.score} />
           <InputContainer
             word={word}
             killMonster={this.killMonster}

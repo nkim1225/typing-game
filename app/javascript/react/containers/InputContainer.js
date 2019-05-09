@@ -6,19 +6,19 @@ class InputContainer extends Component {
     super(props);
     this.state = {
       input: '',
-      solution: this.props.word,
+      word: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
   handleOnChange(event) {
     let subString = event.target.value;
-    if (this.props.started && this.props.word.includes(subString)) {
+    if (this.props.started && this.props.word.substring(0, subString.length) === subString) {
       if (event.target.value === this.props.word) {
         this.setState({ input: '' });
         this.props.killMonster();
       } else {
-        this.setState({ input: event.target.value });
+        this.setState({ input: event.target.value, word: this.props.word });
       }
     }
   }
@@ -33,20 +33,18 @@ class InputContainer extends Component {
       }
     }
   }
+
   render() {
     return (
       <div className="input-container">
-        <div className="nes-container with-title is-centered">
-          <p className="title">Input</p>
-          <TextField
-            className="nes-input"
-            lableName="input"
-            inputName="input"
-            value={this.state.input}
-            handleOnChange={this.handleOnChange}
-            handleKeyDown={this.handleKeyDown}
-          />
-        </div>
+        <TextField
+          className="nes-input"
+          lableName="input"
+          inputName="input"
+          value={this.state.input}
+          handleOnChange={this.handleOnChange}
+          handleKeyDown={this.handleKeyDown}
+        />
       </div>
     );
   }
