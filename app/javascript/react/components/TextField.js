@@ -5,12 +5,13 @@ const TextField = props => {
     <div className="nes-container is-rounded is-centered is-dark with-title">
       <p className="title">Input</p>
       <div className="nes-field">
-        <label>{props.labelName}</label>
+        <label htmlFor="name_field" />
         <input
-          className="nes-input"
           type="text"
           name={props.inputName}
           value={props.value}
+          id="name_field"
+          className="nes-input is-warning"
           onChange={props.handleOnChange}
           onKeyUp={props.handleKeyDown}
         />
