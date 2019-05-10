@@ -50,18 +50,13 @@ h2 {
 .score-board {
   display: flex;
   flex-direction: column;
-  margin: 10px 5%;
+  margin: 0px;
   width: 50%;
-  height: 100px;
-  text-align: left;
 }
 .start-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
   height: 50px;
-  margin-top: 80px;
   width: 30%;
+  margin: 0px 10%;
 }
 
 .game-tile {
