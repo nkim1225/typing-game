@@ -36,11 +36,13 @@ h2 {
 .input-container {
   width: 50%;
   height: 100%;
+  margin: 10px 0;
 }
 .score-container {
   height: 100%;
   width: 50%;
   position: relative;
+  margin: 10px 0;
 }
 .score-tile-container {
   display: flex;
@@ -87,6 +89,35 @@ h2 {
 .enemy {
   height: 100%;
   position: absolute;
+}
+.player-info {
+  height: 100px;
+  width: 90%;
+  margin: 10px 5%;
+  border: 2px white solid;
+}
+.game-container .leader-board .nes-container.with-title.is-rounded.is-dark.is-centered {
+  width: 80%;
+  margin: 100px 10%;
+  height: 1000px;
+}
+.form {
+  margin: 3% 30%;
+  text-align: center;
+}
+.form div {
+  margin: 20px;
+}
+.form div label {
+  color: white;
+}
+.top-bar .name a,
+.top-bar-section .right a {
+  font-family: 'Press Start 2P';
+}
+#error_explanation,
+#error_explanation h2 {
+  color: red;
 }
 #app {
   display: flex;

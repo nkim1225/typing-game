@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ScreenContainer from './ScreenContainer';
 import InputContainer from './InputContainer';
 import ScoreContainer from './ScoreContainer';
+import LeaderBoardContainer from './LeaderBoardContainer';
 import { emptyBoard, GAME_EMPTY, GAME_PLAYER, GAME_TOM } from './../helpers/helper';
 class GameContainer extends Component {
   constructor(props) {
@@ -247,6 +248,12 @@ class GameContainer extends Component {
             started={this.state.started}
             life={this.state.life}
           />
+        </div>
+        <div className="leader-board">
+          <div className="nes-container with-title is-rounded is-dark is-centered">
+            <p className="title">Leader Board</p>
+            <LeaderBoardContainer />
+          </div>
         </div>
       </div>
     );
