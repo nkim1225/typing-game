@@ -39,7 +39,7 @@ class InputContainer extends Component {
       <div className="input-container">
         <TextField
           className="nes-input"
-          lableName="input"
+          labelName="input"
           inputName="input"
           value={this.state.input}
           handleOnChange={this.handleOnChange}
