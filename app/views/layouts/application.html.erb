@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
   
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%#= javascript_include_tag "vendor/modernizr" %>
   
   <%= csrf_meta_tags %>
 
@@ -26,21 +26,21 @@
 <body>
   
   <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
+    <dd class="title-area">
+      <dl class="name">
         <h1><a href="/">TypingGameProject</a></h1>
-      </li>
-    </ul>
+      </dl>
+    </dd>
 
     <section class="top-bar-section">
-      <ul class="right">
+      <dd class="right">
         <%- if current_user -%>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+          <dl><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></dl>
         <%- else -%>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-          <li><%= link_to 'Sign In', new_user_session_path %></li>
+          <dl><%= link_to 'Sign Up', new_user_registration_path %></dl>
+          <dl><%= link_to 'Sign In', new_user_session_path %></dl>
         <%- end -%>
-      </ul>
+      </dd>
     </section>
   </nav>
 
