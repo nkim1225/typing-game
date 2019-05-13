@@ -91,10 +91,28 @@ h2 {
   position: absolute;
 }
 .player-info {
-  height: 100px;
+  height: 95px;
   width: 90%;
-  margin: 10px 5%;
-  border: 2px white solid;
+  margin: 0 5%;
+  padding: 30px 0;
+}
+.player-info dd {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.leader-board dd dl {
+  margin: 0;
+}
+.leader-board-header {
+  color: orange;
+  font-size: 30px;
+}
+.leader-board {
+  margin: 5% 10% 0 10%;
+}
+.leader-board h1 {
+  color: #64e659;
 }
 .game-container .leader-board .nes-container.with-title.is-rounded.is-dark.is-centered {
   width: 80%;
