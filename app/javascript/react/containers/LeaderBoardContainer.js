@@ -44,7 +44,11 @@ class LeaderBoardContainer extends Component {
         />
       );
     });
-    topTen.unshift(<div className="leader-board-header"><PlayerTile key={'-1'} rank={'Rank'} username={'Name'} score={'Score'} /></div>);
+    topTen.unshift(
+      <div className="leader-board-header">
+        <PlayerTile key={'010'} rank={'Rank'} username={'Name'} score={'Score'} />
+      </div>,
+    );
     return <div>{topTen}</div>;
   }
 }
