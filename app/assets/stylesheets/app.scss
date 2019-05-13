@@ -30,7 +30,7 @@ h2 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  min-height: 100px;
+  height: 100px;
   position: relative;
 }
 .input-container {
@@ -125,7 +125,7 @@ h2 {
   justify-content: center;
 }
 #player {
-  min-height: 100px;
+  height: 100px;
   padding-bottom: 10%;
   padding-right: 10%;
 }
@@ -145,4 +145,27 @@ h2 {
 }
 .nes-balloon.from-left {
   color: black;
+}
+.top-bar {
+}
+.top-bar,
+.right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: black;
+  height: 50px;
+}
+.title-area {
+  padding: 5px 0;
+}
+.right dl {
+  padding: 12px 10px;
+}
+a:visited {
+  color: white;
+}
+.flash.flash-alert {
+  text-align: center;
+  color: red;
 }

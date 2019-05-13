@@ -9,12 +9,22 @@ class LeaderBoardContainer extends Component {
     };
   }
   render() {
-    return <dd>
-      <dl><PlayerTile /></dl>
-      <dl><PlayerTile /></dl>
-      <dl><PlayerTile /></dl>
-      <dl><PlayerTile /></dl>
-    </dd>;
+    return (
+      <dd>
+        <dl>
+          <PlayerTile />
+        </dl>
+        <dl>
+          <PlayerTile />
+        </dl>
+        <dl>
+          <PlayerTile />
+        </dl>
+        <dl>
+          <PlayerTile />
+        </dl>
+      </dd>
+    );
   }
 }
 export default LeaderBoardContainer;
