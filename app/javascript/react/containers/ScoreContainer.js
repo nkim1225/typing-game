@@ -15,10 +15,11 @@ class ScoreContainer extends Component {
           <p className="title">Score Container</p>
           <div className="score-tile-container">
             <div className="score-board">
-              <p>Score: {this.props.score}</p>
+              <ul>{this.props.player}</ul>
+              <ul>Score: {this.props.score}</ul>
             </div>
             <div className="start-button">
-              <button className="nes-btn" onClick={this.props.start}>
+              <button type="button" className="nes-btn" onClick={this.props.start}>
                 Start
               </button>
             </div>

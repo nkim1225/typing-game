@@ -36,17 +36,16 @@ class LeaderBoardContainer extends Component {
       rank++;
       return (
         <PlayerTile
-          key={player.id}
+          key={player.id + 'leaderBoard'}
           rank={rank}
           username={player.username}
           score={player.score}
-          date={player.date}
         />
       );
     });
     topTen.unshift(
-      <div className="leader-board-header">
-        <PlayerTile key={'010'} rank={'Rank'} username={'Name'} score={'Score'} />
+      <div className="leader-board-header" key="header">
+        <PlayerTile key={'header'} rank={'Rank'} username={'Name'} score={'Score'} />
       </div>,
     );
     return <div>{topTen}</div>;

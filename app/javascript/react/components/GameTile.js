@@ -23,7 +23,6 @@ class GameTile extends Component {
     if (this.props.character === '[+]') {
       return (
         <div className="game-tile">
-          {/*<div className="in-tile">{this.props.character}</div>*/}
           <img id="player" src={mainCharacter} alt="mainCharacter" />
         </div>
       );
@@ -33,7 +32,6 @@ class GameTile extends Component {
     } else {
       return (
         <div className="game-tile">
-          {/*<div className="in-tile">*/}
           <img className="enemy" src={zombie} alt="enemy" />
           {wordBubble}
         </div>

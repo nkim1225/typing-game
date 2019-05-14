@@ -4,15 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :username, presence: true, uniqueness: true
+  validates :username, uniqueness: true, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :top_score, presence: true
 
-  def date
-    updated_at.strftime("%B %e, %Y, %l:%M %P")
-  end
-
-  def topscore
-    top_score
-  end
 end
