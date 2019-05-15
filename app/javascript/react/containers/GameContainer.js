@@ -68,10 +68,6 @@ class GameContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   gameOverScreen() {
-    let button = '';
-    if (this.state.player.id !== null) {
-      button = <button onClick={this.updateHighScore}>Post Score</button>;
-    }
     toast(
       ({ closeToast }) => (
         <div className="nes-container is-rounded is-dark">
@@ -81,10 +77,7 @@ class GameContainer extends Component {
             <dl>Score: {this.state.score}</dl>
           </dd>
           <div className="game-over-buttons">
-            {button}
-            <button type="submit" onClick={closeToast}>
-              Close
-            </button>
+            <button onClick={this.updateHighScore}>Close</button>
           </div>
         </div>
       ),
@@ -134,9 +127,19 @@ class GameContainer extends Component {
       this.nextLevelScreen();
       this.setState({ started: false });
     } else {
-      this.gameOverScreen();
       this.fetchLevel(1);
-      this.setState({ level: 1, board: emptyBoard(), started: false });
+      this.setState({
+        board: emptyBoard(),
+        playerPosition: 2,
+        started: false,
+        time: 0,
+        level: 1,
+        currentEnemies: [],
+        nextEnemies: [],
+        life: true,
+        score: 0,
+      });
+      this.gameOverScreen();
     }
   }
   spawnEnemy(board) {
@@ -148,7 +151,7 @@ class GameContainer extends Component {
       let currentKey = board[randomRow][0].key;
       board[randomRow][0] = enemy;
       board[randomRow][0].key = currentKey;
-    } else if (spawnList.length === 0 && this.allClear()) {
+    } else if (this.state.currentEnemies.length === 0 && this.allClear()) {
       this.gameOver(true);
       let key = board[this.state.playerPosition][board[0].length - 1].key;
       board[this.state.playerPosition][board[0].length - 1] = {
@@ -195,7 +198,7 @@ class GameContainer extends Component {
       this.fetchLevel(this.state.level);
     }
     let copy = this.state.board;
-    copy[2][copy[0].length - 1].value = '[+]';
+    copy[this.state.playerPosition][copy[0].length - 1].value = '[+]';
     this.setState({ board: copy });
     document.getElementsByName('input')[0].focus();
     this.interval = setInterval(() => {
@@ -245,7 +248,9 @@ class GameContainer extends Component {
         });
       }
     }
-    this.setState({ board: copy });
+    if (this.state.started) {
+      this.setState({ board: copy });
+    }
   }
 
   killMonster() {
