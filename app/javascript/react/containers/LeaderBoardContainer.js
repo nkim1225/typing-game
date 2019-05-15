@@ -8,6 +8,7 @@ class LeaderBoardContainer extends Component {
       players: [],
     };
     this.fetchUsers = this.fetchUsers.bind(this);
+    this.update = this.update.bind(this);
   }
   fetchUsers() {
     fetch(`/api/v1/users`)
@@ -29,7 +30,9 @@ class LeaderBoardContainer extends Component {
   componentDidMount() {
     this.fetchUsers();
   }
-
+  update() {
+    this.fetchUsers();
+  }
   render() {
     let rank = 0;
     let topTen = this.state.players.map(player => {
@@ -48,7 +51,12 @@ class LeaderBoardContainer extends Component {
         <PlayerTile key={'header'} rank={'Rank'} username={'Name'} score={'Score'} />
       </div>,
     );
-    return <div>{topTen}</div>;
+    return (
+      <div>
+        <button onClick={this.update}>TEST UPDATE</button>
+        {topTen}
+      </div>
+    );
   }
 }
 export default LeaderBoardContainer;

@@ -18,7 +18,7 @@ class GameContainer extends Component {
       level: 1,
       currentEnemies: [],
       nextEnemies: [],
-      life: true,
+      life: false,
       score: 0,
       player: { username: 'PLAYER 1', id: null },
     };
@@ -42,6 +42,7 @@ class GameContainer extends Component {
   updateHighScore(event) {
     event.preventDefault();
     let scorePayload = {
+      id: this.state.player.id,
       score: this.state.score,
     };
     fetch(`/api/v1/users/${this.state.player.id}`, {
@@ -63,9 +64,7 @@ class GameContainer extends Component {
         }
       })
       .then(response => response.json())
-      .then(body => {
-        debugger;
-      })
+      .then(body => {})
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   gameOverScreen() {
@@ -83,7 +82,9 @@ class GameContainer extends Component {
           </dd>
           <div className="game-over-buttons">
             {button}
-            <button onClick={closeToast}>Close</button>
+            <button type="submit" onClick={closeToast}>
+              Close
+            </button>
           </div>
         </div>
       ),
@@ -134,7 +135,8 @@ class GameContainer extends Component {
       this.setState({ started: false });
     } else {
       this.gameOverScreen();
-      this.setState({ level: 1, life: false });
+      this.fetchLevel(1);
+      this.setState({ level: 1, life: false, started: false });
     }
   }
   spawnEnemy(board) {
