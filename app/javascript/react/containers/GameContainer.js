@@ -45,6 +45,18 @@ class GameContainer extends Component {
       id: this.state.player.id,
       score: this.state.score,
     };
+    this.fetchLevel(1);
+    this.setState({
+      board: emptyBoard(),
+      playerPosition: 2,
+      started: false,
+      time: 0,
+      level: 1,
+      currentEnemies: [],
+      nextEnemies: [],
+      life: true,
+      score: 0,
+    });
     fetch(`/api/v1/users/${this.state.player.id}`, {
       credentials: 'same-origin',
       method: 'PATCH',
@@ -127,18 +139,6 @@ class GameContainer extends Component {
       this.nextLevelScreen();
       this.setState({ started: false });
     } else {
-      this.fetchLevel(1);
-      this.setState({
-        board: emptyBoard(),
-        playerPosition: 2,
-        started: false,
-        time: 0,
-        level: 1,
-        currentEnemies: [],
-        nextEnemies: [],
-        life: true,
-        score: 0,
-      });
       this.gameOverScreen();
     }
   }
@@ -223,7 +223,6 @@ class GameContainer extends Component {
 
   advanceMonsters() {
     let copy = [...this.state.board];
-    this.spawnEnemy(copy);
     let monsters;
     let element;
     for (let i = 0; i < copy.length; i++) {
@@ -249,7 +248,7 @@ class GameContainer extends Component {
       }
     }
     if (this.state.started) {
-      this.setState({ board: copy });
+      this.setState({ board: this.spawnEnemy(copy) });
     }
   }
 
