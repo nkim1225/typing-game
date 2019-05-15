@@ -29,6 +29,10 @@ class GameContainer extends Component {
     this.allClear = this.allClear.bind(this);
     this.targetedEnemy = this.targetedEnemy.bind(this);
   }
+  componentDidMount() {
+    this.fetchLevel(1);
+  }
+
   targetedEnemy() {
     let enemy = null;
     let monsters = this.findMonsters(this.state.playerPosition);
@@ -101,13 +105,13 @@ class GameContainer extends Component {
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   start() {
+    if (this.state.level !== 1) {
+      this.fetchLevel(this.state.level);
+    }
     let copy = this.state.board;
     copy[2][copy[0].length - 1].value = '[+]';
     this.setState({ board: copy });
     document.getElementsByName('input')[0].focus();
-
-    this.fetchLevel(this.state.level);
-
     this.interval = setInterval(() => {
       this.setState({ time: this.state.time + 1 });
       if (this.state.time !== 0 && this.state.time % 2 === 0) {
@@ -250,8 +254,8 @@ class GameContainer extends Component {
           />
         </div>
         <div className="leader-board">
-          <div className="nes-container with-title is-rounded is-dark is-centered">
-            <p className="title">Leader Board</p>
+          <h1>Leader Board</h1>
+          <div className="nes-container is-rounded is-dark is-centered">
             <LeaderBoardContainer />
           </div>
         </div>

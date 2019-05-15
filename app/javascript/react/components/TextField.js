@@ -11,7 +11,7 @@ const TextField = props => {
           name={props.inputName}
           value={props.value}
           id="name_field"
-          className="nes-input is-warning"
+          className="nes-input"
           onChange={props.handleOnChange}
           onKeyUp={props.handleKeyDown}
         />
