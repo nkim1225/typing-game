@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ScreenContainer from './ScreenContainer';
 import InputContainer from './InputContainer';
 import ScoreContainer from './ScoreContainer';
 import LeaderBoardContainer from './LeaderBoardContainer';
 import { emptyBoard, GAME_EMPTY, GAME_PLAYER, GAME_TOM } from './../helpers/helper';
+
 class GameContainer extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +18,9 @@ class GameContainer extends Component {
       level: 1,
       currentEnemies: [],
       nextEnemies: [],
-      life: true,
+      life: false,
       score: 0,
+      player: { username: 'PLAYER 1', id: null },
     };
     this.movePlayer = this.movePlayer.bind(this);
     this.findMonsters = this.findMonsters.bind(this);
@@ -28,11 +32,85 @@ class GameContainer extends Component {
     this.gameOver = this.gameOver.bind(this);
     this.allClear = this.allClear.bind(this);
     this.targetedEnemy = this.targetedEnemy.bind(this);
+    this.gameOverScreen = this.gameOverScreen.bind(this);
+    this.nextLevelScreen = this.nextLevelScreen.bind(this);
+    this.updateHighScore = this.updateHighScore.bind(this);
   }
   componentDidMount() {
     this.fetchLevel(1);
   }
-
+  updateHighScore(event) {
+    event.preventDefault();
+    let scorePayload = {
+      id: this.state.player.id,
+      score: this.state.score,
+    };
+    fetch(`/api/v1/users/${this.state.player.id}`, {
+      credentials: 'same-origin',
+      method: 'PATCH',
+      body: JSON.stringify(scorePayload),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(body => {})
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+  gameOverScreen() {
+    let button = '';
+    if (this.state.player.id !== null) {
+      button = <button onClick={this.updateHighScore}>Post Score</button>;
+    }
+    toast(
+      ({ closeToast }) => (
+        <div className="nes-container is-rounded is-dark">
+          <dd>
+            <dl>Game Over</dl>
+            <dl>Level: {this.state.level}</dl>
+            <dl>Score: {this.state.score}</dl>
+          </dd>
+          <div className="game-over-buttons">
+            {button}
+            <button type="submit" onClick={closeToast}>
+              Close
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        position: toast.POSITION.TOP_CENTER,
+        animation: false,
+      },
+    );
+  }
+  nextLevelScreen() {
+    toast(
+      ({ closeToast }) => (
+        <div className="nes-container is-rounded is-dark">
+          <dd>
+            <dl>Level {this.state.level - 1} Complete!</dl>
+            <dl>Score: {this.state.score}</dl>
+          </dd>
+          <button onClick={closeToast}>Close</button>
+        </div>
+      ),
+      {
+        position: toast.POSITION.TOP_CENTER,
+        animation: false,
+      },
+    );
+  }
   targetedEnemy() {
     let enemy = null;
     let monsters = this.findMonsters(this.state.playerPosition);
@@ -53,11 +131,12 @@ class GameContainer extends Component {
   gameOver(input) {
     clearInterval(this.interval);
     if (input) {
-      alert(`LEVEL ${this.state.level} COMPLETE`);
+      this.nextLevelScreen();
       this.setState({ started: false });
     } else {
-      alert('GAME OVER');
-      this.setState({ life: false });
+      this.gameOverScreen();
+      this.fetchLevel(1);
+      this.setState({ level: 1, life: false, started: false });
     }
   }
   spawnEnemy(board) {
@@ -83,7 +162,9 @@ class GameContainer extends Component {
     return board;
   }
   fetchLevel(level) {
-    fetch(`/api/v1/levels/${level}`)
+    fetch(`/api/v1/levels/${level}`, {
+      credentials: 'same-origin',
+    })
       .then(response => {
         if (response.ok) {
           return response;
@@ -96,11 +177,11 @@ class GameContainer extends Component {
       .then(response => response.json())
       .then(body => {
         let randomWords = require('random-words');
-        body = body.map(enemy => {
+        let enemies = body.enemies.map(enemy => {
           enemy.word = randomWords({ exactly: this.state.level, join: ' ' });
           return enemy;
         });
-        this.setState({ currentEnemies: body });
+        this.setState({ player: body.player, currentEnemies: enemies });
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -238,13 +319,20 @@ class GameContainer extends Component {
     return (
       <div className="game-container">
         <h2>Game Container</h2>
+        <div className="notify">
+          <ToastContainer autoClose={false} closeButton={false} draggable={false} />
+        </div>
         <ScreenContainer
           board={this.state.board}
           playerPosition={this.state.playerPosition}
           targetedEnemy={this.targetedEnemy()}
         />
         <div id="bottom-panel">
-          <ScoreContainer start={this.start} score={this.state.score} />
+          <ScoreContainer
+            start={this.start}
+            score={this.state.score}
+            player={this.state.player.username}
+          />
           <InputContainer
             word={word}
             killMonster={this.killMonster}
