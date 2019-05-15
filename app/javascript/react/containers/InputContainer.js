@@ -23,7 +23,7 @@ class InputContainer extends Component {
     }
   }
   handleKeyDown(event) {
-    if (this.props.started && this.props.life) {
+    if (this.props.started) {
       if (event.keyCode === 38) {
         this.props.movePlayer('UP');
         this.setState({ input: '' });
