@@ -25,7 +25,6 @@ class ScreenContainer extends Component {
       <div className="screen-border">
         <div className="nes-container is-rounded is-dark">
           <div className="screen-container">
-            {/*<img id="background" src={background} alt="background" />*/}
             <div className="game-row">{board[0]}</div>
             <div className="game-row">{board[1]}</div>
             <div className="game-row">{board[2]}</div>
