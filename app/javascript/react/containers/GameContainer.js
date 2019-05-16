@@ -116,8 +116,8 @@ class GameContainer extends Component {
         </div>
       ),
       {
-        position: toast.POSITION.TOP_CENTER,
         animation: false,
+        transition: false,
       },
     );
   }
@@ -133,8 +133,8 @@ class GameContainer extends Component {
         </div>
       ),
       {
-        position: toast.POSITION.TOP_CENTER,
         animation: false,
+        transition: false,
       },
     );
   }
@@ -351,9 +351,9 @@ class GameContainer extends Component {
     return (
       <div className="game-container">
         <h2>Game Container</h2>
-        <div className="notify">
-          <ToastContainer autoClose={false} closeButton={false} draggable={false} />
-        </div>
+        {/*<div className="notify">*/}
+        {/*<ToastContainer autoClose={false} closeButton={false} draggable={false} />*/}
+        {/*</div>*/}
         <ScreenContainer
           board={this.state.board}
           playerPosition={this.state.playerPosition}
