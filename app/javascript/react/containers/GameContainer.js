@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { ToastContainer, toast, Flip } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import Typist from 'react-typist';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-typist/dist/Typist.css';
 import ScreenContainer from './ScreenContainer';
 import InputContainer from './InputContainer';
 import ScoreContainer from './ScoreContainer';
@@ -350,10 +352,14 @@ class GameContainer extends Component {
     }
     return (
       <div className="game-container">
-        <h2>Game Container</h2>
-        {/*<div className="notify">*/}
-        {/*<ToastContainer autoClose={false} closeButton={false} draggable={false} />*/}
-        {/*</div>*/}
+        <Typist
+          className="game-title"
+          avgTypingSpeed={50}
+          startDelay={2000}
+          cursor={{ hideWhenDone: true, blink: true }}
+        >
+          TYPING SLUG
+        </Typist>
         <ScreenContainer
           board={this.state.board}
           playerPosition={this.state.playerPosition}
@@ -375,7 +381,14 @@ class GameContainer extends Component {
           />
         </div>
         <div className="leader-board">
-          <h1>Leader Board</h1>
+          <Typist
+            className="game-title"
+            avgTypingSpeed={50}
+            startDelay={2000}
+            cursor={{ hideWhenDone: true, blink: true }}
+          >
+            Leader Board
+          </Typist>
           <div className="nes-container is-rounded is-dark is-centered">
             <LeaderBoardContainer players={this.state.players} />
           </div>

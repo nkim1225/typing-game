@@ -131,7 +131,7 @@ h2 {
 .leader-board {
   margin: 5% 10% 0 10%;
 }
-.leader-board h1 {
+.leader-board .game-title {
   color: #64e659;
 }
 .game-container .leader-board .nes-container.with-title.is-rounded.is-dark.is-centered {
@@ -185,6 +185,7 @@ h2 {
   color: black;
 }
 .top-bar {
+  padding: 0 10px;
 }
 .top-bar,
 .right {
@@ -200,11 +201,17 @@ h2 {
 .right dl {
   padding: 12px 10px;
 }
+a,
 a:visited,
 a:hover,
 a:active,
 a:link {
   color: white;
+  font-size: 20px;
+}
+.top-bar a:hover {
+  color: white;
+  text-decoration: none;
 }
 .flash.flash-alert {
   text-align: center;
@@ -233,4 +240,7 @@ a:link {
 }
 .game-over-buttons button {
   margin: 5px;
+}
+.game-title {
+  font-size: 40px;
 }
