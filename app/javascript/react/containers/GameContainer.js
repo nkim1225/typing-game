@@ -79,29 +79,31 @@ class GameContainer extends Component {
       life: true,
       score: 0,
     });
-    fetch(`/api/v1/users/${this.state.player.id}`, {
-      credentials: 'same-origin',
-      method: 'PATCH',
-      body: JSON.stringify(scorePayload),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
+    if (this.state.player.id !== null) {
+      fetch(`/api/v1/users/${this.state.player.id}`, {
+        credentials: 'same-origin',
+        method: 'PATCH',
+        body: JSON.stringify(scorePayload),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
       })
-      .then(response => response.json())
-      .then(body => {
-        this.fetchUsers();
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
+        .then(response => {
+          if (response.ok) {
+            return response;
+          } else {
+            let errorMessage = `${response.status} (${response.statusText})`,
+              error = new Error(errorMessage);
+            throw error;
+          }
+        })
+        .then(response => response.json())
+        .then(body => {
+          this.fetchUsers();
+        })
+        .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
   }
   gameOverScreen() {
     toast(
@@ -356,7 +358,7 @@ class GameContainer extends Component {
           className="game-title"
           avgTypingSpeed={50}
           startDelay={2000}
-          cursor={{ hideWhenDone: true, blink: true }}
+          cursor={{ hideWhenDone: true, element: '|' }}
         >
           TYPING SLUG
         </Typist>
