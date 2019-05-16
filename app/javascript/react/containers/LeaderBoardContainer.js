@@ -7,35 +7,37 @@ class LeaderBoardContainer extends Component {
     this.state = {
       players: [],
     };
-    this.fetchUsers = this.fetchUsers.bind(this);
-    this.update = this.update.bind(this);
+    // this.fetchUsers = this.fetchUsers.bind(this);
+    // this.update = this.update.bind(this);
   }
-  fetchUsers() {
-    fetch(`/api/v1/users`)
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status}(${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => response.json())
-      .then(body => {
-        this.setState({ players: body });
-      })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
-  }
-  componentDidMount() {
-    this.fetchUsers();
-  }
-  update() {
-    this.fetchUsers();
-  }
+
+  // fetchUsers() {
+  //   fetch(`/api/v1/users`)
+  //     .then(response => {
+  //       if (response.ok) {
+  //         return response;
+  //       } else {
+  //         let errorMessage = `${response.status}(${response.statusText})`,
+  //           error = new Error(errorMessage);
+  //         throw error;
+  //       }
+  //     })
+  //     .then(response => response.json())
+  //     .then(body => {
+  //       this.setState({ players: body });
+  //     })
+  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
+  // }
+  // componentDidMount() {
+  //   this.fetchUsers();
+  // }
+  //
+  // update() {
+  //   this.fetchUsers();
+  // }
   render() {
     let rank = 0;
-    let topTen = this.state.players.map(player => {
+    let topTen = this.props.players.map(player => {
       rank++;
       return (
         <PlayerTile
@@ -51,12 +53,7 @@ class LeaderBoardContainer extends Component {
         <PlayerTile key={'header'} rank={'Rank'} username={'Name'} score={'Score'} />
       </div>,
     );
-    return (
-      <div>
-        <button onClick={this.update}>TEST UPDATE</button>
-        {topTen}
-      </div>
-    );
+    return <div>{topTen}</div>;
   }
 }
 export default LeaderBoardContainer;
