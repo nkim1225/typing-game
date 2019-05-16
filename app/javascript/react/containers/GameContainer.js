@@ -21,6 +21,7 @@ class GameContainer extends Component {
       life: true,
       score: 0,
       player: { username: 'PLAYER 1', id: null },
+      players: [],
     };
     this.movePlayer = this.movePlayer.bind(this);
     this.findMonsters = this.findMonsters.bind(this);
@@ -35,9 +36,28 @@ class GameContainer extends Component {
     this.gameOverScreen = this.gameOverScreen.bind(this);
     this.nextLevelScreen = this.nextLevelScreen.bind(this);
     this.updateHighScore = this.updateHighScore.bind(this);
+    this.fetchUsers = this.fetchUsers.bind(this);
   }
   componentDidMount() {
     this.fetchLevel(1);
+    this.fetchUsers();
+  }
+  fetchUsers() {
+    fetch(`/api/v1/users`)
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status}(${response.statusText})`,
+            error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ players: body });
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   updateHighScore(event) {
     event.preventDefault();
@@ -76,7 +96,9 @@ class GameContainer extends Component {
         }
       })
       .then(response => response.json())
-      .then(body => {})
+      .then(body => {
+        this.fetchUsers();
+      })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
   gameOverScreen() {
@@ -342,6 +364,7 @@ class GameContainer extends Component {
             start={this.start}
             score={this.state.score}
             player={this.state.player.username}
+            started={this.state.started}
           />
           <InputContainer
             word={word}
@@ -354,7 +377,7 @@ class GameContainer extends Component {
         <div className="leader-board">
           <h1>Leader Board</h1>
           <div className="nes-container is-rounded is-dark is-centered">
-            <LeaderBoardContainer />
+            <LeaderBoardContainer players={this.state.players} />
           </div>
         </div>
       </div>
