@@ -1,4 +1,3 @@
-require 'pry'
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :score
 
