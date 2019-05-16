@@ -7,34 +7,7 @@ class LeaderBoardContainer extends Component {
     this.state = {
       players: [],
     };
-    // this.fetchUsers = this.fetchUsers.bind(this);
-    // this.update = this.update.bind(this);
   }
-
-  // fetchUsers() {
-  //   fetch(`/api/v1/users`)
-  //     .then(response => {
-  //       if (response.ok) {
-  //         return response;
-  //       } else {
-  //         let errorMessage = `${response.status}(${response.statusText})`,
-  //           error = new Error(errorMessage);
-  //         throw error;
-  //       }
-  //     })
-  //     .then(response => response.json())
-  //     .then(body => {
-  //       this.setState({ players: body });
-  //     })
-  //     .catch(error => console.error(`Error in fetch: ${error.message}`));
-  // }
-  // componentDidMount() {
-  //   this.fetchUsers();
-  // }
-  //
-  // update() {
-  //   this.fetchUsers();
-  // }
   render() {
     let rank = 0;
     let topTen = this.props.players.map(player => {
